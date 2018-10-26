@@ -52,9 +52,15 @@ unsigned int Subscriber::runningID = 0;
  *
  * It is possible to overload the notify() method to provide context
  * to a specific message, so long as the overloaded method ultimately
- * calls MessageBase::notfy()
- *
- */
+ * calls MessageBase::notfy().
+ * For instance:
+ * \code{.cpp}
+ * void MessageBaseDescendant::notify( ContextType* someContext ) {
+ *   setContext(someContext);
+ *   MessageBase::notify();
+ * }
+ * \endcode
+*/
 class MessageBase {
 private:
     vector<Subscriber*> subscribers;

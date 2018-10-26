@@ -14,7 +14,12 @@ make docs
 ```
 
 **To Run**
+
+``` shell
 ./pubsub
+
+```
+
 
 **Notes**
 This example code is not very interactive.  It first runs a series of semi-unit tests, then pretends to setup a real world example.

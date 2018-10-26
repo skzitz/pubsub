@@ -5,6 +5,8 @@ LFLAGS	=	-ggdb3 -Wall
 SRCS	=	pubsub.cpp
 OBJS	=	$(SRCS:.cpp=.o)
 
+.PHONY: all clean docs
+
 all: pubsub
 
 pubsub: $(OBJS)
@@ -14,4 +16,7 @@ pubsub: $(OBJS)
 	$(CPP) -o $@ -c $< $(CPPFLAGS)
 
 clean:
-	rm -f pubsub $(OBJS) $~
+	rm -rf pubsub $(OBJS) $~ html latex
+
+docs:
+	@doxygen

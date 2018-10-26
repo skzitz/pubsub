@@ -1,10 +1,27 @@
+/**
+ * \brief publish/subscribe sample code
+ *
+ * This is the beginning of some of my experiments with publish/subscribe model
+ * This is not meant as a drop-in, just a playground for now.
+ *
+ * \author Stephan K. Zitz
+ */
+
 #include <bits/stdc++.h>
 #include <vector>
 
 using namespace std;
 
+
 class MessageBase;
 
+
+/**
+ * \class Subscriber
+ *
+ * Anything that wants to subscribe to a message must
+ * descend from this class
+ */
 class Subscriber {
 private:
     unsigned int ID;
@@ -20,6 +37,24 @@ public:
 unsigned int Subscriber::runningID = 0;
 
 
+/**
+ * \class MessageBase
+ *
+ * Any messages that will be published must descend
+ * from this class
+ *
+ * The "name" parameter is provided as a means to differentiate similar messages
+ * with a differentiator.  It is not necessary to use (hence a default constructor
+ * is provided)
+ *
+ * To use, add subscribers via addSubscriber() and when ready to publish
+ * this message, call its notify() method.
+ *
+ * It is possible to overload the notify() method to provide context
+ * to a specific message, so long as the overloaded method ultimately
+ * calls MessageBase::notfy()
+ *
+ */
 class MessageBase {
 private:
     vector<Subscriber*> subscribers;
@@ -27,6 +62,7 @@ private:
 
 public:
     MessageBase(string _name ) : name(_name){}
+    MessageBase() {}
     virtual ~MessageBase() = default;
 
     void copySubscribers(const MessageBase* from) { subscribers = from->subscribers; }
